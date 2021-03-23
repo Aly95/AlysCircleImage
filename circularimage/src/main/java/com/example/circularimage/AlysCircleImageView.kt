@@ -10,7 +10,7 @@ import com.example.circularimage.utils.convertDpToPixelFloat
 import com.example.circularimage.utils.setHeight
 import com.example.circularimage.utils.setWidth
 import com.google.android.material.card.MaterialCardView
-import com.squareup.picasso.Picasso
+//import com.squareup.picasso.Picasso
 
 class AlysCircleImageView : MaterialCardView {
 
@@ -50,11 +50,14 @@ class AlysCircleImageView : MaterialCardView {
             setWidth(sizeInPixels)
         }
 
-        Picasso.get()
-            .load(image)
-            .fit()
-            .centerCrop()
-            .into(imageView)
+        imageView.setImageResource(image)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+
+//        Picasso.get()
+//            .load(image)
+//            .fit()
+//            .centerCrop()
+//            .into(imageView)
     }
 
     fun addStroke(colour: Int = Color.WHITE, size: Float = 2f) {
