@@ -1,0 +1,3 @@
+include ':circularimage'
+include ':app'
+rootProject.name = "CircularLibrary"
