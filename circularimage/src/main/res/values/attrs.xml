@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="WPCircleView">
+    <declare-styleable name="AlysCircleImageView">
         <attr name="default_radius" format="float"/>
     </declare-styleable>
 </resources>

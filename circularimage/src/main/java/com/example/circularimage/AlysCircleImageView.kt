@@ -12,8 +12,6 @@ import com.example.circularimage.utils.setWidth
 import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 
-//import com.squareup.picasso.Picasso
-
 class AlysCircleImageView : MaterialCardView {
 
     private val cardView: MaterialCardView
@@ -37,23 +35,14 @@ class AlysCircleImageView : MaterialCardView {
     }
 
     private fun init(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.WPCircleView)
-        val circleRadius = typedArray.getFloat(R.styleable.WPCircleView_default_radius, 0f)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AlysCircleImageView)
+        val circleRadius = typedArray.getFloat(R.styleable.AlysCircleImageView_default_radius, 0f)
         radius = convertDpToPixelFloat(circleRadius, context)
         typedArray.recycle()
     }
 
     fun showImage(image: Int, size: Float) {
-        val sizeInPixels = convertDpToPixel(size, context)
-        radius = sizeInPixels / 2f
-
-        imageView.apply {
-            setHeight(sizeInPixels)
-            setWidth(sizeInPixels)
-        }
-
-//        imageView.setImageResource(image)
-//        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+        updateImageFormatting(size)
 
         Picasso.with(context)
             .load(image)
@@ -62,9 +51,36 @@ class AlysCircleImageView : MaterialCardView {
             .into(imageView)
     }
 
+    fun showImage(image: String, size: Float) {
+        updateImageFormatting(size)
+
+        Picasso.with(context)
+                .load(image)
+                .fit()
+                .centerCrop()
+                .into(imageView)
+    }
+
     fun addStroke(colour: Int = Color.WHITE, size: Float = 2f) {
         strokeColor = colour
         strokeWidth = convertDpToPixel(size, context)
     }
 
+
+    private fun updateImageFormatting(size: Float) {
+        val sizeInPixels = convertDpToPixel(size, context)
+        addRadius(sizeInPixels)
+        applyImageViewSizes(sizeInPixels)
+    }
+
+    private fun applyImageViewSizes(sizeInPixels: Int) {
+        imageView.apply {
+            setHeight(sizeInPixels)
+            setWidth(sizeInPixels)
+        }
+    }
+
+    private fun addRadius(sizeInPixels: Int) {
+        radius = sizeInPixels / 2f
+    }
 }
