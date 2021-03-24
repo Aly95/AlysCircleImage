@@ -2,6 +2,7 @@ package com.example.circularimage
 
 import android.content.Context
 import android.graphics.Color
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -52,6 +53,16 @@ class AlysCircleImageView : MaterialCardView {
     }
 
     fun showImage(image: String, size: Float) {
+        updateImageFormatting(size)
+
+        Picasso.with(context)
+                .load(image)
+                .fit()
+                .centerCrop()
+                .into(imageView)
+    }
+    
+    fun showImage(image: Uri, size: Float) {
         updateImageFormatting(size)
 
         Picasso.with(context)
